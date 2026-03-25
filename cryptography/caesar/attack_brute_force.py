@@ -1,29 +1,29 @@
-upper = "ABCDEFGHIJKLMNOPQRXTUVWXYZ"
-lower = "abcdefghijklmnopqrxtuvwxyz"
-n = len(upper)
+import string
 
-#import string 활용하기. 
+upper = string.ascii_uppercase
+lower = string.ascii_lowercase
 
-def caesar_input():
-    
+def UI():
+    print("This is a Caesar encryption machine.\n" \
+    "if you give me a key and plain text, we'll show the Ciphertext.")
+
+def PLATIN_INPUT():
     key = int(input("Enter Shift value:"))
-    string = input("Enter strings:")
-    
-    print("key = {}\nstring={}".format(key,string))
+    M = input("Enter any strings:")
 
-    return key,string
+    return key,M
 
-def caesar(key,string):
+def CAESAR_ENC(key,string):
     new_upper = upper
     new_lower = lower
     new_string = ""
 
-    for idx in range(n):
-        if idx < n-key:        
+    #key shift에 따른 알파벳 재 정렬
+    for idx in range(26):
+        if idx < 26-key:
             new_upper = upper[key:] + upper[:key]
-        else:
             new_lower = lower[key:] + lower[:key]
-    
+
     for char in string:
         idx = 0
         flag = True
@@ -36,27 +36,11 @@ def caesar(key,string):
                 flag = False
             else:
                 idx +=1
-    
+
     return new_string
 
 if __name__ == "__main__":
-    print("This is a Caesar Cipher encoding machine!")
-    key, string = caesar_input()
-    new_string =  caesar(key,string)
-    print("new string = {}".format(new_string))
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-
+    UI()
+    key,string = PLATIN_INPUT()
+    Ciphertext = CAESAR_ENC(key,string)
+    print("Ciphertext = {}".format(Ciphertext))
